@@ -1,24 +1,33 @@
 <?php include 'connect.php';?>
 
 <!-- register -->
-<?php
-if (isset($_POST['save'])) {
-    $username = $_POST['name'];
-    $password = $_POST['password'];
+ <?php
+if(isset($_POST['save'])){
+    session_start();
+
+    $name = $_POST['name'];
     $email = $_POST['email'];
+    $password = $_POST['password'];
     $phone = $_POST['phone'];
-    $query = "INSERT INTO register (name, password, email, phone) 
-              VALUES ('$username', '$password', '$email', '$phone')";
+    $house = $_POST['house'];
+    $street = $_POST['street'];
+    $city = $_POST['city'];
+    $state = $_POST['state'];
+    $pincode = $_POST['pincode'];
 
-    $data = mysqli_query($con, $query);
+    $query = "INSERT INTO register (name,email,password,phone,house,street,city,state,pincode)
+             VALUES ('$name','$email','$password','$phone','$house','$street','$city','$state','$pincode')";
 
-    if ($data) {
-        echo "<script>alert('Register successful');</script>";
-    } else {
-        echo "<script>alert('Register failed');</script>";
+    $data=mysqli_query($con, $query);
+    if($data){
+        echo"<script>alert('successful');</script>";
     }
+    else{
+         echo"<script>alert('failed');</script>";
+    }
+
+     header("Location: login.php"); // redirect after success
 }
 ?>
-
 
 
