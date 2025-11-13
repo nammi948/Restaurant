@@ -333,7 +333,7 @@
                                             <button
                                                 class="btn btn-success btn-sm fw-semibold px-4 py-1 rounded-pill shadow-sm"
                                                 data-bs-toggle="modal" data-bs-target="#modal" data-id="123671"
-                                                data-name="Idly" data-price="120">
+                                                data-name="Idly" data-price="120"
                                                 style="position: absolute; bottom: -10px; left: 50%; transform:
                                                 translateX(-50%);">
                                                 ADD
@@ -940,7 +940,7 @@
 
                     <!-- Modal Body -->
                     <div class="modal-body">
-                        <form id="orderForm">
+                        <form id="orderForm" action="ajax_cart.php" method="POST">
                             <div class="mb-3">
                                 <label class="form-label">Item ID</label>
                                 <input type="text" class="form-control" name="item_id" placeholder="Enter Item ID"
