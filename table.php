@@ -33,7 +33,7 @@ if (isset($_POST['delete'])) {
 }
 
 // Fetch users
-$fetch_list = "SELECT * FROM register";
+$fetch_list = "SELECT * FROM register ";
 $res = mysqli_query($con, $fetch_list);
 if (!$res) {
     die("Query failed: " . mysqli_error($con));

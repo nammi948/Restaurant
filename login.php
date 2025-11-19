@@ -1,4 +1,5 @@
 <?php include 'connect.php';?>
+
 <?php
 // if(isset($_POST['login'])){
 //     $username=$_POST['name'];
@@ -22,6 +23,7 @@
 ?>
 
 <?php
+session_start();
 if (isset($_POST['login'])) {
     $username = $_POST['name'];
     $password = $_POST['password'];
@@ -35,6 +37,8 @@ if (isset($_POST['login'])) {
 
         // Prepare user data for JS (as JSON)
         $userData = json_encode($row);
+
+        $_SESSION['user_data']= $row;
 
         // ✅ Store all info in localStorage via JavaScript
         echo "

@@ -13,7 +13,7 @@
 
 <body>
     <header class="sticky-top">
-        <nav class="navbar navbar-expand-lg bg-body-tertiary">
+        <nav class="navbar navbar-expand-lg bg-body-secondary">
             <a class="navbar-brand px-5 d-flex align-items-center" href="#">
         <img class="navbar-logo img-fluid rounded-circle me-2" src="assets/images/logo1.jpg" alt="Logo" style="width:80px; height:80px;">
        </a>
@@ -61,7 +61,7 @@
                     <div class="div">
                         <button class="btn btn-outline-success btn-sm m-3" data-bs-toggle="modal"
                             data-bs-target="#modal6">Sign Up</button>
-                        <button class="btn btn-outline-success btn-sm " data-bs-toggle="modal"
+                        <button class="btn btn-outline-danger btn-sm " data-bs-toggle="modal"
                             data-bs-target="#modal2">Login</button>
                     </div>
                 </div>
@@ -86,8 +86,9 @@
                             crafting dishes that speak to your heart as much as your hunger.
                         </p>
                         <div class="d-flex gap-3">
-                            <a href="menu.php" class="btn btn-primary rounded-pill px-4">Book a Table</a>
-                            <a href="menu.php" class="btn btn-outline-primary rounded-pill px-4">Explore Menu</a>
+                            <button class="btn btn-primary rounded-pill px-4" data-bs-toggle="modal"
+                        data-bs-target="#modal4">Book a Table</button>
+                            <a href="#" class="btn btn-outline-primary rounded-pill px-4">Explore Menu</a>
                         </div>
                     </div>
                     <div class="col-md-6 p-0">
@@ -151,7 +152,7 @@
                                 <p class="card-text">Serve 2 people. Chicken dum biryani with layers of rice and meat.
                                 </p>
                                 <p class="fs-6"><i class="fa-solid fa-indian-rupee-sign me-1"></i>350</p>
-                                <button class="btn btn-success" data-bs-toggle="modal" data-bs-target="#modal"
+                                <button class="btn btn-success" data-bs-toggle="modal" data-bs-target="#modal2"
                                     type="submit">Place Order</button>
                             </div>
                         </div>
@@ -164,7 +165,7 @@
                                 <h5 class="card-title">Non Veg Thali</h5>
                                 <p class="card-text">Smoky Butter Chicken with delicate Rumali Rotis for a feast.</p>
                                 <p class="fs-6"><i class="fa-solid fa-indian-rupee-sign me-1"></i>350</p>
-                                <button class="btn btn-success" data-bs-toggle="modal" data-bs-target="#modal"
+                                <button class="btn btn-success" data-bs-toggle="modal" data-bs-target="#modal2"
                                     type="submit">Place Order</button>
                             </div>
                         </div>
@@ -177,7 +178,7 @@
                                 <h5 class="card-title">Veg Thali</h5>
                                 <p class="card-text">Bold Pindi Chole flavors with freshly made Rumali Rotis.</p>
                                 <p class="fs-6"><i class="fa-solid fa-indian-rupee-sign me-1"></i>350</p>
-                                <button class="btn btn-success" data-bs-toggle="modal" data-bs-target="#modal"
+                                <button class="btn btn-success" data-bs-toggle="modal" data-bs-target="#modal2"
                                     type="submit">Place Order</button>
                             </div>
                         </div>
@@ -549,47 +550,101 @@
             </div>
         </section>
          <!-- register -->
-        <section>
-            <div class="modal" tabindex="-1" id="modal6">
-                <div class="modal-dialog">
-                    <div class="modal-content">
-                        <div class="modal-header">
-                            <h3 class="modal-title fw-bold mx-auto">Registration</h3>
-                            <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
-                        </div>
-                        <div class="modal-body">
-                            <form action="register.php" method="POST" id="modal1">
-                                <div class="mb-3">
-                                    <label for="Name" class="form-label">Name</label>
-                                    <input type="text" class="form-control" name="name" placeholder="Username"
-                                        oninput="this.value=this.value.replace(/[^A-Za-z/s]/g,'')" required>
-                                </div>
-                                <div class="mb-3">
-                                    <label for="Password" class="form-label">Password</label>
-                                    <input type="password" class="form-control" name="password" placeholder="Password"
-                                        required>
-                                </div>
-                                <div class="mb-3">
-                                    <label for="Email" class="form-label">Email</label>
-                                    <input type="email" class="form-control" name="email" placeholder="Email" required>
-                                </div>
-                                <div class="mb-3">
-                                    <label class="form-label">Phone Number</label>
-                                    <input type="text" name="phone" class="form-control"
-                                        oninput="this.value=this.value.replace(/[^0-9]/g,'').slice(0,10)" required>
-                                </div>
-                                <div class="modal-footer">
-                                    <button type="button" class="btn btn-secondary"
-                                        data-bs-dismiss="modal">Close</button>
-                                    <button type="submit" class="btn btn-primary" name="save">Register</button>
-                                </div>
-                            </form>
-                        </div>
-                    </div>
+<section>
+    <div class="modal" tabindex="-1" id="modal6">
+        <div class="modal-dialog modal-dialog-centered">
+            <div class="modal-content">
+
+                <div class="modal-header">
+                    <h3 class="modal-title fw-bold mx-auto">Create Account</h3>
+                    <button type="button" class="btn-close" data-bs-dismiss="modal"></button>
                 </div>
-        </section>
+
+                <div class="modal-body">
+                    <form action="register.php" method="POST">
+
+                        <!-- FULL NAME -->
+                        <div class="mb-3">
+                            <label class="form-label">Full Name</label>
+                            <input type="text" class="form-control" name="name"
+                                placeholder="Ex: Ramesh Kumar"
+                                oninput="this.value=this.value.replace(/[^A-Za-z\s]/g,'')" required>
+                        </div>
+
+                        <!-- EMAIL -->
+                        <div class="mb-3">
+                            <label class="form-label">Email</label>
+                            <input type="email" class="form-control" name="email"
+                                placeholder="Ex: ramesh@gmail.com" required>
+                        </div>
+
+                        <!-- PASSWORD -->
+                        <div class="mb-3">
+                            <label class="form-label">Password</label>
+                            <input type="password" class="form-control" name="password"
+                                placeholder="Create Password" required>
+                        </div>
+
+                        <!-- PHONE -->
+                        <div class="mb-3">
+                            <label class="form-label">Phone Number</label>
+                            <input type="text" name="phone" class="form-control"
+                                placeholder="10 digit mobile number"
+                                oninput="this.value=this.value.replace(/[^0-9]/g,'').slice(0,10)" required>
+                        </div>
+
+                        <!-- ADDRESS SECTION -->
+                        <h5 class="fw-bold">Delivery Address</h5>
+                        <div class="row">
+                            <div class="col-md-6 mb-3">
+                                <label class="form-label">House / Flat No.</label>
+                                <input type="text" class="form-control" name="house" required>
+                            </div>
+
+                            <div class="col-md-6 mb-3">
+                                <label class="form-label">Street / Area</label>
+                                <input type="text" class="form-control" name="street" required>
+                            </div>
+                        </div>
+
+                        <div class="row">
+                            <div class="col-md-6 mb-3">
+                                <label class="form-label">City</label>
+                                <input type="text" class="form-control" name="city"
+                                    oninput="this.value=this.value.replace(/[^A-Za-z\s]/g,'')" required>
+                            </div>
+                            <div class="col-md-6 mb-3">
+                                <label class="form-label">State</label>
+                                <input type="text" class="form-control" name="state"
+                                    oninput="this.value=this.value.replace(/[^A-Za-z\s]/g,'')" required>
+                            </div>
+                        </div>
+
+                        <div class="mb-3">
+                            <label class="form-label">Pincode</label>
+                            <input type="text" name="pincode" class="form-control"
+                                oninput="this.value=this.value.replace(/[^0-9]/g,'').slice(0,6)" required>
+                        </div>
+
+                        <!-- BUTTONS -->
+                        <div class="modal-footer">
+                            <button type="button" class="btn btn-secondary"
+                                data-bs-dismiss="modal">Close</button>
+                            <button type="submit" class="btn btn-success" name="save">
+                                Register
+                            </button>
+                        </div>
+
+                    </form>
+                </div>
+
+            </div>
+        </div>
+    </div>
+</section>
+
          <!-- login -->
-        <section>
+<section>
             <div class="modal" tabindex="-1" id="modal2">
                 <div class="modal-dialog">
                     <div class="modal-content">
@@ -608,16 +663,20 @@
                                     <label for="Password" class="form-label">Password</label>
                                     <input type="password" class="form-control" name="password" placeholder="Password">
                                 </div>
-                                <div class="modal-footer">
-                                    <button type="button" class="btn btn-secondary"
-                                        data-bs-dismiss="modal">Close</button>
-                                    <button type="submit" class="btn btn-primary" name="login">Login</button>
-                                </div>
-                            </form>
-                        </div>
-                    </div>
-                </div>
-        </section>
+                               <div class="modal-footer d-flex justify-content-between">
+    <a href="#" data-bs-toggle="modal" data-bs-target="#modal6">Create an Account</a>
+
+    <div>
+        <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
+        <button type="submit" class="btn btn-primary" name="login">Login</button>
+    </div>
+</div>
+
+</form>
+</div>  
+</div>
+</div>
+</section>
         <!--register for event -->
         <section>
             <div class="modal" tabindex="-1" id="modal4">
@@ -663,7 +722,11 @@
                 </div>
             </div>
         </section>
-<section class="bg-dark text-white pt-5 pb-4">
+
+    </main>
+
+<footer class="sticky">
+ <section class="bg-dark text-white pt-5 pb-4">
       <div class="container">
         <div class="row text-center text-md-start">
 
@@ -703,14 +766,12 @@
           </div>
 
         </div>
-      </div>
-    </section>
-    </main>
-
-<footer class="sticky">
-  <div class="container-fluid text-white text-center py-3 mt-0" style="background-color: rgb(0, 50, 122);">
+        <hr class="divider"></hr>
+         <div class="text-white text-center py-3 mt-0">
     <p class="mb-0 fw-bold">© Copyright MyWebsite All Rights Reserved</p>
   </div>
+      </div>
+    </section>
 </footer>
 
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.8/dist/js/bootstrap.bundle.min.js"

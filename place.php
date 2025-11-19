@@ -1,3 +1,4 @@
+<?php   include 'connect.php';?>
 <!doctype html>
 <html lang="en">
 
@@ -99,7 +100,7 @@
 
                 </ul>
                 <div class="button">
-                    <a href="index.php" class="btn btn-outline-primary btn-sm m-3">Back</a>
+                    <a href="index.php" class="btn btn-outline-danger btn-sm m-3">Logout</a>
                 </div>
             </div>
             </div>
@@ -108,822 +109,383 @@
     <!-- menu -->
     <main>
         <!-- ✅ Section 1: Veg Dishes -->
-        <section class="py-4" style="background-color: #f1f1f1;">
-            <div class="container">
-                <h3 class="fw-bold mb-4 text-center text-success">Veg Dishes</h3>
+<section class="py-4" style="background-color: #f1f1f1;">
+    <div class="container">
 
-                <div class="accordion" id="vegAccordion">
+        <h3 class="fw-bold mb-4 text-center text-success">Veg Dishes</h3>
 
-                    <!-- Paneer Keema -->
-                    <div class="accordion-item border-0 border-bottom rounded-3 shadow-sm mb-3">
-                        <h2 class="accordion-header">
-                            <button class="accordion-button fw-semibold bg-white" type="button"
-                                data-bs-toggle="collapse" data-bs-target="#vegOne" aria-expanded="true"
-                                aria-controls="vegOne">
-                                Paneer Dishes
-                            </button>
-                        </h2>
-                        <div id="vegOne" class="accordion-collapse collapse show" data-bs-parent="#vegAccordion">
-                            <div class="accordion-body">
-                                <div class="card shadow-sm border-0 rounded-4 overflow-hidden mb-2">
-                                    <div class="card-body d-flex justify-content-between align-items-center flex-wrap">
+        <div class="accordion" id="vegAccordion">
 
-                                        <!-- Left side -->
-                                        <div class="mb-2">
-                                            <h5 class="fw-bold mb-1 text-dark">Paneer Keema</h5>
-                                            <p>Finely crumbled paneer cooked in a rich, spiced tomato-onion gravy —
-                                                bursting with aromatic
-                                                Indian flavors.</p>
-                                            <p>Serve(1-2)Peoples</p>
-                                            <p class="mb-1 text-success fw-semibold">₹280</p>
+            <!-- ======================= PANEER SECTION ======================= -->
+            <div class="accordion-item mb-3 shadow-sm rounded-3">
+                <h2 class="accordion-header">
+                    <button class="accordion-button fw-semibold" type="button"
+                        data-bs-toggle="collapse" data-bs-target="#paneerSection" 
+                        aria-expanded="true">
+                        Paneer Dishes
+                    </button>
+                </h2>
 
-                                        </div>
+                <div id="paneerSection" class="accordion-collapse collapse show"
+                     data-bs-parent="#vegAccordion">
+                    <div class="accordion-body">
 
-                                        <!-- Right side -->
-                                        <div class="position-relative text-center">
-                                            <img src="assets/images/menu/paneer-keema.avif" alt="Paneer Keema"
-                                                class="rounded mb-2"
-                                                style="width:130px; height:100px; object-fit:cover;">
-                                            <button
-                                                class="btn btn-success btn-sm fw-semibold px-4 py-1 rounded-pill shadow-sm addbtn"
-                                                style="position: absolute; bottom: -10px; left: 50%; transform: translateX(-50%);"
-                                                data-bs-toggle="modal" data-bs-target="#modal" data-id="12345"
-                                                data-name="Paneer Keema" data-price="280">
-                                                Add
-                                            </button>
+                        <?php
+                        $paneer = mysqli_query($con, 
+                            "SELECT * FROM order_list 
+                             WHERE order_name LIKE '%paneer%' 
+                             ORDER BY order_id ASC");
 
+                        while ($row = mysqli_fetch_assoc($paneer)) { ?>
+                        
+                        <div class="card shadow-sm border-0 rounded-4 overflow-hidden mb-2">
+                            <div class="card-body d-flex justify-content-between align-items-center flex-wrap">
 
-                                        </div>
-
-                                    </div>
+                                <div class="mb-2">
+                                    <h5 class="fw-bold mb-1"><?= ucfirst($row['order_name']) ?></h5>
+                                    <p class="mb-1 text-success fw-semibold">₹<?= $row['order_price'] ?></p>
                                 </div>
-                                <hr class="divider">
-                                </hr>
-                                <div class="accordion-body">
-                                    <div class="card shadow-sm border-0 rounded-4 overflow-hidden mb-2">
-                                        <div
-                                            class="card-body d-flex justify-content-between align-items-center flex-wrap">
 
-                                            <div class="mb-2">
-                                                <h5 class="fw-bold mb-1 text-dark">Paneer Biryani</h5>
-                                                <p class="mb-1 text-success fw-semibold">₹280</p>
-                                            </div>
+                                <div class="position-relative text-center">
+                                    <img src="<?= $row['item_photo'] ?>" 
+                                         class="rounded mb-2"
+                                         style="width:130px; height:100px; object-fit:cover;">
 
-                                            <div class="position-relative text-center">
-                                                <img src="assets/images/menu/paneer-biryani.avif" alt="Veg Kolhapuri"
-                                                    class="rounded mb-2"
-                                                    style="width:130px; height:100px; object-fit:cover;">
-                                                <button
-                                                    class="btn btn-success btn-sm fw-semibold px-4 py-1 rounded-pill shadow-sm addbtn"
-                                                    style="position: absolute; bottom: -10px; left: 50%; transform: translateX(-50%);"
-                                                    data-bs-toggle="modal" data-bs-target="#modal" data-id="12346"
-                                                    data-name="Paneer Biryani" data-price="280">
-                                                    Add
-                                                </button>
-
-                                            </div>
-
-                                        </div>
-                                    </div>
+                                    <button class="btn btn-success btn-sm fw-semibold px-4 py-1 rounded-pill shadow-sm addbtn"
+                                        style="position:absolute; bottom:-10px; left:50%; transform:translateX(-50%);"
+                                        data-bs-toggle="modal" data-bs-target="#modal"
+                                        data-id="<?= $row['order_id'] ?>"
+                                        data-name="<?= $row['order_name'] ?>"
+                                        data-price="<?= $row['order_price'] ?>">
+                                        Add
+                                    </button>
                                 </div>
-                                <hr class="divider">
-                                </hr>
-                                <div class="accordion-body">
-                                    <div class="card shadow-sm border-0 rounded-4 overflow-hidden mb-2">
-                                        <div
-                                            class="card-body d-flex justify-content-between align-items-center flex-wrap">
 
-                                            <div class="mb-2">
-                                                <h5 class="fw-bold mb-1 text-dark">Panner Tikka</h5>
-                                                <p class="mb-1 text-success fw-semibold">₹280</p>
-                                            </div>
-
-                                            <div class="position-relative text-center">
-                                                <img src="assets/images/menu/paneer-tikka.avif" alt="Veg Kolhapuri"
-                                                    class="rounded mb-2"
-                                                    style="width:130px; height:100px; object-fit:cover;">
-                                                <button
-                                                    class="btn btn-success btn-sm fw-semibold px-4 py-1 rounded-pill shadow-sm"
-                                                    style="position: absolute; bottom: -10px; left: 50%; transform: translateX(-50%);"
-                                                    data-bs-toggle="modal" data-bs-target="#modal" data-id="12347"
-                                                    data-name="Paneer Tikka" data-price="280">
-                                                    Add
-                                                </button>
-                                            </div>
-
-                                        </div>
-                                    </div>
-                                </div>
                             </div>
                         </div>
-                    </div>
 
-                    <!-- Veg Kolhapuri -->
-                    <div class="accordion-item border-0 border-bottom rounded-3 shadow-sm mb-3">
-                        <h2 class="accordion-header">
-                            <button class="accordion-button collapsed fw-semibold bg-white" type="button"
-                                data-bs-toggle="collapse" data-bs-target="#vegTwo" aria-expanded="false"
-                                aria-controls="vegTwo">
-                                Veg Items(3)
-                            </button>
-                        </h2>
-                        <div id="vegTwo" class="accordion-collapse collapse" data-bs-parent="#vegAccordion">
-                            <div class="accordion-body">
-                                <div class="card shadow-sm border-0 rounded-4 overflow-hidden mb-2">
-                                    <div class="card-body d-flex justify-content-between align-items-center flex-wrap">
+                        <?php } ?>
 
-                                        <div class="mb-2">
-                                            <h5 class="fw-bold mb-1 text-dark">Veg Biryani</h5>
-                                            <p class="mb-1 text-success fw-semibold">₹280</p>
-                                        </div>
-
-                                        <div class="position-relative text-center">
-                                            <img src="assets/images/menu/veg-biryani.avif" alt="Veg Kolhapuri"
-                                                class="rounded mb-2"
-                                                style="width:130px; height:100px; object-fit:cover;">
-                                            <button
-                                                class="btn btn-success btn-sm fw-semibold px-4 py-1 rounded-pill shadow-sm"
-                                                style="position: absolute; bottom: -10px; left: 50%; transform: translateX(-50%);"
-                                                data-bs-toggle="modal" data-bs-target="#modal" data-id="123567"
-                                                data-name="Veg Biryani" data-price="280">
-                                                Add
-                                            </button>
-
-                                        </div>
-
-                                    </div>
-                                </div>
-                                <hr class="divider">
-                                </hr>
-                                <div class="card shadow-sm border-0 rounded-4 overflow-hidden mb-2">
-                                    <div class="card-body d-flex justify-content-between align-items-center flex-wrap">
-
-                                        <div class="mb-2">
-                                            <h5 class="fw-bold mb-1 text-dark">Veg Thali</h5>
-                                            <p class="mb-1 text-success fw-semibold">₹280</p>
-                                        </div>
-
-                                        <div class="position-relative text-center">
-                                            <img src="assets/images/menu/veg-thali.avif" alt="Veg Kolhapuri"
-                                                class="rounded mb-2"
-                                                style="width:130px; height:100px; object-fit:cover;">
-                                            <button
-                                                class="btn btn-success btn-sm fw-semibold px-4 py-1 rounded-pill shadow-sm"
-                                                style="position: absolute; bottom: -10px; left: 50%; transform: translateX(-50%);"
-                                                data-bs-toggle="modal" data-bs-target="#modal" data-id="123568"
-                                                data-name="Veg Thali" data-price="280">
-                                                Add
-                                            </button>
-                                        </div>
-
-                                    </div>
-                                </div>
-                                <hr class="divider">
-                                </hr>
-                                <div class="card shadow-sm border-0 rounded-4 overflow-hidden mb-2">
-                                    <div class="card-body d-flex justify-content-between align-items-center flex-wrap">
-
-                                        <div class="mb-2">
-                                            <h5 class="fw-bold mb-1 text-dark">Veg Mixed Thali</h5>
-                                            <p class="mb-1 text-success fw-semibold">₹280</p>
-                                        </div>
-
-                                        <div class="position-relative text-center">
-                                            <img src="assets/images/menu/veg-mixed.avif" alt="Veg Kolhapuri"
-                                                class="rounded mb-2"
-                                                style="width:130px; height:100px; object-fit:cover;">
-                                            <button
-                                                class="btn btn-success btn-sm fw-semibold px-4 py-1 rounded-pill shadow-sm"
-                                                style="position: absolute; bottom: -10px; left: 50%; transform: translateX(-50%);"
-                                                data-bs-toggle="modal" data-bs-target="#modal" data-id="123569"
-                                                data-name=">Veg Mixed Thali" data-price="280">
-                                                Add
-                                            </button>
-
-                                        </div>
-
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                    <!-- Tiffin Section -->
-                    <div class="accordion-item border-0 border-bottom rounded-3 shadow-sm mb-3">
-                        <h2 class="accordion-header">
-                            <button class="accordion-button collapsed fw-semibold bg-white" type="button"
-                                data-bs-toggle="collapse" data-bs-target="#vegThree" aria-expanded="false"
-                                aria-controls="vegThree">
-                                Tiffins Items
-                            </button>
-                        </h2>
-                        <div id="vegThree" class="accordion-collapse collapse" data-bs-parent="#vegAccordion">
-                            <div class="accordion-body">
-                                <div class="card shadow-sm border-0 rounded-4 overflow-hidden mb-2">
-                                    <div class="card-body d-flex justify-content-between align-items-center flex-wrap">
-
-                                        <div class="mb-2">
-                                            <h5 class="fw-bold mb-1 text-dark">Idly</h5>
-                                            <p class="mb-1 text-success fw-semibold">₹120</p>
-                                        </div>
-
-                                        <div class="position-relative text-center">
-                                            <img src="assets/images/menu/idly.avif" alt="Veg Kolhapuri"
-                                                class="rounded mb-2"
-                                                style="width:130px; height:100px; object-fit:cover;">
-                                            <button
-                                                class="btn btn-success btn-sm fw-semibold px-4 py-1 rounded-pill shadow-sm"
-                                                data-bs-toggle="modal" data-bs-target="#modal" data-id="123671"
-                                                data-name="Idly" data-price="120"
-                                                style="position: absolute; bottom: -10px; left: 50%; transform:
-                                                translateX(-50%);">
-                                                ADD
-                                            </button>
-                                        </div>
-
-                                    </div>
-                                </div>
-                                <hr class="divider">
-                                </hr>
-                                <div class="card shadow-sm border-0 rounded-4 overflow-hidden mb-2">
-                                    <div class="card-body d-flex justify-content-between align-items-center flex-wrap">
-
-                                        <div class="mb-2">
-                                            <h5 class="fw-bold mb-1 text-dark">Dosa</h5>
-                                            <p class="mb-1 text-success fw-semibold">₹120</p>
-                                        </div>
-
-                                        <div class="position-relative text-center">
-                                            <img src="assets/images/menu/dosa.avif" alt="Veg Kolhapuri"
-                                                class="rounded mb-2"
-                                                style="width:130px; height:100px; object-fit:cover;">
-                                            <button
-                                                class="btn btn-success btn-sm fw-semibold px-4 py-1 rounded-pill shadow-sm"
-                                                style="position: absolute; bottom: -10px; left: 50%; transform: translateX(-50%);"
-                                                data-bs-toggle="modal" data-bs-target="#modal" data-id="123672"
-                                                data-name="Dosa" data-price="120">
-                                                Add
-                                            </button>
-
-                                        </div>
-
-                                    </div>
-                                </div>
-                            </div>
-                            <hr class="divider">
-                            </hr>
-                            <div class="card shadow-sm border-0 rounded-4 overflow-hidden mb-2">
-                                <div class="card-body d-flex justify-content-between align-items-center flex-wrap">
-
-                                    <div class="mb-2">
-                                        <h5 class="fw-bold mb-1 text-dark">Fried Idly</h5>
-                                        <p class="mb-1 text-success fw-semibold">₹120</p>
-                                    </div>
-
-                                    <div class="position-relative text-center">
-                                        <img src="assets/images/menu/fried-idly.avif" alt="Veg Kolhapuri"
-                                            class="rounded mb-2" style="width:130px; height:100px; object-fit:cover;">
-                                        <button
-                                            class="btn btn-success btn-sm fw-semibold px-4 py-1 rounded-pill shadow-sm"
-                                            style="position: absolute; bottom: -10px; left: 50%; transform: translateX(-50%);"
-                                            data-bs-toggle="modal" data-bs-target="#modal" data-id="123673"
-                                            data-name="Fried Idly" data-price="120">
-                                            Add
-                                        </button>
-
-                                    </div>
-
-                                </div>
-                            </div>
-                        </div>
                     </div>
                 </div>
             </div>
+
+            <!-- ======================= VEG ITEMS SECTION ======================= -->
+            <div class="accordion-item mb-3 shadow-sm rounded-3">
+                <h2 class="accordion-header">
+                    <button class="accordion-button fw-semibold collapsed" type="button"
+                        data-bs-toggle="collapse" data-bs-target="#vegSection">
+                        Veg Items
+                    </button>
+                </h2>
+
+                <div id="vegSection" class="accordion-collapse collapse" 
+                     data-bs-parent="#vegAccordion">
+                    <div class="accordion-body">
+
+                        <?php
+                        $veg = mysqli_query($con, 
+                            "SELECT * FROM order_list 
+                             WHERE order_name LIKE '%veg%' 
+                             OR order_name LIKE '%thali%' 
+                             ORDER BY order_id ASC");
+
+                        while ($row = mysqli_fetch_assoc($veg)) { ?>
+
+                        <div class="card shadow-sm border-0 rounded-4 overflow-hidden mb-2">
+                            <div class="card-body d-flex justify-content-between align-items-center flex-wrap">
+
+                                <div class="mb-2">
+                                    <h5 class="fw-bold mb-1"><?= ucfirst($row['order_name']) ?></h5>
+                                    <p class="mb-1 text-success fw-semibold">₹<?= $row['order_price'] ?></p>
+                                </div>
+
+                                <div class="position-relative text-center">
+                                    <img src="<?= $row['item_photo'] ?>" 
+                                         class="rounded mb-2"
+                                         style="width:130px; height:100px; object-fit:cover;">
+
+                                    <button class="btn btn-success btn-sm fw-semibold px-4 py-1 rounded-pill shadow-sm addbtn"
+                                        style="position:absolute; bottom:-10px; left:50%; transform:translateX(-50%);"
+                                        data-bs-toggle="modal" data-bs-target="#modal"
+                                        data-id="<?= $row['order_id'] ?>"
+                                        data-name="<?= $row['order_name'] ?>"
+                                        data-price="<?= $row['order_price'] ?>">
+                                        Add
+                                    </button>
+                                </div>
+
+                            </div>
+                        </div>
+
+                        <?php } ?>
+
+                    </div>
+                </div>
             </div>
-            </div><!-- /Veg Accordion -->
+
+            <!-- ======================= TIFFIN SECTION ======================= -->
+            <div class="accordion-item mb-3 shadow-sm rounded-3">
+                <h2 class="accordion-header">
+                    <button class="accordion-button fw-semibold collapsed" type="button"
+                        data-bs-toggle="collapse" data-bs-target="#tiffinSection">
+                        Tiffin Items
+                    </button>
+                </h2>
+
+                <div id="tiffinSection" class="accordion-collapse collapse"
+                     data-bs-parent="#vegAccordion">
+                    <div class="accordion-body">
+
+                        <?php
+                        $tiffin = mysqli_query($con, 
+                            "SELECT * FROM order_list 
+                             WHERE order_name LIKE '%idly%' 
+                             OR order_name LIKE '%dosa%' 
+                             OR order_name LIKE '%fried%' 
+                             ORDER BY order_id ASC");
+
+                        while ($row = mysqli_fetch_assoc($tiffin)) { ?>
+
+                        <div class="card shadow-sm border-0 rounded-4 overflow-hidden mb-2">
+                            <div class="card-body d-flex justify-content-between align-items-center flex-wrap">
+
+                                <div class="mb-2">
+                                    <h5 class="fw-bold mb-1"><?= ucfirst($row['order_name']) ?></h5>
+                                    <p class="mb-1 text-success fw-semibold">₹<?= $row['order_price'] ?></p>
+                                </div>
+
+                                <div class="position-relative text-center">
+                                    <img src="<?= $row['item_photo'] ?>" 
+                                         class="rounded mb-2"
+                                         style="width:130px; height:100px; object-fit:cover;">
+
+                                    <button class="btn btn-success btn-sm fw-semibold px-4 py-1 rounded-pill shadow-sm addbtn"
+                                        style="position:absolute; bottom:-10px; left:50%; transform:translateX(-50%);"
+                                        data-bs-toggle="modal" data-bs-target="#modal"
+                                        data-id="<?= $row['order_id'] ?>"
+                                        data-name="<?= $row['order_name'] ?>"
+                                        data-price="<?= $row['order_price'] ?>">
+                                        Add
+                                    </button>
+                                </div>
+
+                            </div>
+                        </div>
+
+                        <?php } ?>
+
+                    </div>
+                </div>
             </div>
-        </section>
+
+        </div><!-- /Accordion -->
+
+    </div>
+</section>
+
 
 
         <!-- ✅ Section 2: Non-Veg Dishes -->
-        <section class="py-4" style="background-color: #f1f1f1;">
-            <div class="container">
-                <h3 class="fw-bold mb-4 text-center text-danger">Non-Veg Dishes</h3>
+     <?php
+// Fetch all non-veg items
+$sql = "SELECT * FROM order_list";
+$result = mysqli_query($con, $sql);
 
-                <div class="accordion" id="nonVegAccordion">
+// Create category groups
+$categories = [
+    "Chicken Dishes" => [],
+    "Mutton Specials" => [],
+    "Prawn Dishes" => [],
+    "Fish Dishes"   => []
+];
 
-                    <!-- Chicken Curry -->
-                    <div class="accordion-item border-0 border-bottom rounded-3 shadow-sm mb-3">
-                        <h2 class="accordion-header">
-                            <button class="accordion-button fw-semibold bg-white" type="button"
-                                data-bs-toggle="collapse" data-bs-target="#nonVegOne" aria-expanded="true"
-                                aria-controls="nonVegOne">
-                                Chicken Dishes
-                            </button>
-                        </h2>
-                        <div id="nonVegOne" class="accordion-collapse collapse show" data-bs-parent="#nonVegAccordion">
-                            <div class="accordion-body">
-                                <div class="card shadow-sm border-0 rounded-4 overflow-hidden mb-2">
-                                    <div class="card-body d-flex justify-content-between align-items-center flex-wrap">
+while ($row = mysqli_fetch_assoc($result)) {
 
-                                        <div class="mb-2">
-                                            <h5 class="fw-bold mb-1 text-dark">Chicken Biryani</h5>
-                                            <p class="mb-1 text-success fw-semibold">₹420</p>
-                                        </div>
+    $name = strtolower($row['order_name']);
 
-                                        <div class="position-relative text-center">
-                                            <img src="assets/images/menu/biryani.webp" alt="Butter Chicken"
-                                                class="rounded mb-2"
-                                                style="width:130px; height:100px; object-fit:cover;">
-                                            <button
-                                                class="btn btn-success btn-sm fw-semibold px-4 py-1 rounded-pill shadow-sm"
-                                                style="position: absolute; bottom: -10px; left: 50%; transform: translateX(-50%);"
-                                                data-bs-toggle="modal" data-bs-target="#modal" data-id="2345671"
-                                                data-name="Chicken Biryani" data-price="420">
-                                                Add
-                                            </button>
+    if (strpos($name, 'chicken') !== false) {
+        $categories["Chicken Dishes"][] = $row;
+    }
+    elseif (strpos($name, 'mutton') !== false) {
+        $categories["Mutton Specials"][] = $row;
+    }
+    elseif (strpos($name, 'prawn') !== false) {
+        $categories["Prawn Dishes"][] = $row;
+    }
+    elseif (strpos($name, 'fish') !== false) {
+        $categories["Fish Dishes"][] = $row;
+    }
+}
+?>
 
-                                        </div>
+<section class="py-4" style="background-color: #f1f1f1;">
+    <div class="container">
+        <h3 class="fw-bold mb-4 text-center text-danger">Non-Veg Dishes</h3>
 
-                                    </div>
+        <div class="accordion" id="nonVegAccordion">
+
+            <?php 
+            $i = 1;
+            foreach ($categories as $catName => $items): 
+            ?>
+
+            <div class="accordion-item border-0 border-bottom rounded-3 shadow-sm mb-3">
+                <h2 class="accordion-header">
+                    <button class="accordion-button fw-semibold bg-white" type="button"
+                        data-bs-toggle="collapse" data-bs-target="#cat<?= $i ?>" aria-expanded="true">
+                        <?= $catName ?>
+                    </button>
+                </h2>
+
+                <div id="cat<?= $i ?>" class="accordion-collapse collapse show" data-bs-parent="#nonVegAccordion">
+                    <div class="accordion-body">
+
+                        <?php foreach($items as $item): ?>
+                        <div class="card shadow-sm border-0 rounded-4 overflow-hidden mb-2">
+                            <div class="card-body d-flex justify-content-between align-items-center flex-wrap">
+
+                                <div class="mb-2">
+                                    <h5 class="fw-bold mb-1 text-dark"><?= $item['order_name'] ?></h5>
+                                    <p class="mb-1 text-success fw-semibold">₹<?= $item['order_price'] ?></p>
                                 </div>
-                                <hr class="divider">
-                                </hr>
-                                <div class="card shadow-sm border-0 rounded-4 overflow-hidden mb-2">
-                                    <div class="card-body d-flex justify-content-between align-items-center flex-wrap">
 
-                                        <div class="mb-2">
-                                            <h5 class="fw-bold mb-1 text-dark">Fry Chicken Biryani</h5>
-                                            <p class="mb-1 text-success fw-semibold">₹420</p>
-                                        </div>
+                                <div class="position-relative text-center">
+                                    <img src="<?= $item['item_photo'] ?>" class="rounded mb-2"
+                                        style="width:130px; height:100px; object-fit:cover;">
 
-                                        <div class="position-relative text-center">
-                                            <img src="assets/images/menu/fry-biryani.avif" alt="Butter Chicken"
-                                                class="rounded mb-2"
-                                                style="width:130px; height:100px; object-fit:cover;">
-                                            <button
-                                                class="btn btn-success btn-sm fw-semibold px-4 py-1 rounded-pill shadow-sm"
-                                                style="position: absolute; bottom: -10px; left: 50%; transform: translateX(-50%);"
-                                                data-bs-toggle="modal" data-bs-target="#modal" data-id="2345672"
-                                                data-name="Fry Chicken Biryani" data-price="420">
-                                                Add
-                                            </button>
-                                        </div>
-
-                                    </div>
+                                    <button class="btn btn-success btn-sm fw-semibold px-4 py-1 rounded-pill shadow-sm"
+                                        style="position:absolute; bottom:-10px; left:50%; transform:translateX(-50%);"
+                                        data-bs-toggle="modal" data-bs-target="#modal"
+                                        data-id="<?= $item['order_id'] ?>"
+                                        data-name="<?= $item['order_name'] ?>"
+                                        data-price="<?= $item['order_price'] ?>">
+                                        Add
+                                    </button>
                                 </div>
-                                <hr class="divider">
-                                </hr>
-                                <div class="card shadow-sm border-0 rounded-4 overflow-hidden mb-2">
-                                    <div class="card-body d-flex justify-content-between align-items-center flex-wrap">
 
-                                        <div class="mb-2">
-                                            <h5 class="fw-bold mb-1 text-dark">Chilli Chicken</h5>
-                                            <p class="mb-1 text-success fw-semibold">₹420</p>
-                                        </div>
-
-                                        <div class="position-relative text-center">
-                                            <img src="assets/images/menu/chilli-chicken.avif" alt="Butter Chicken"
-                                                class="rounded mb-2"
-                                                style="width:130px; height:100px; object-fit:cover;">
-                                            <button
-                                                class="btn btn-success btn-sm fw-semibold px-4 py-1 rounded-pill shadow-sm"
-                                                style="position: absolute; bottom: -10px; left: 50%; transform: translateX(-50%);"
-                                                data-bs-toggle="modal" data-bs-target="#modal" data-id="2345673"
-                                                data-name="Chilli Chicken" data-price="420">
-                                                Add
-                                            </button>
-
-                                        </div>
-
-                                    </div>
-                                </div>
                             </div>
                         </div>
-                    </div>
 
-                    <!-- Mutton Curry -->
-                    <div class="accordion-item border-0 border-bottom rounded-3 shadow-sm mb-3">
-                        <h2 class="accordion-header">
-                            <button class="accordion-button collapsed fw-semibold bg-white" type="button"
-                                data-bs-toggle="collapse" data-bs-target="#nonVegTwo" aria-expanded="false"
-                                aria-controls="nonVegTwo">
-                                Mutton Specials
-                            </button>
-                        </h2>
-                        <div id="nonVegTwo" class="accordion-collapse collapse" data-bs-parent="#nonVegAccordion">
-                            <div class="accordion-body">
-                                <div class="card shadow-sm border-0 rounded-4 overflow-hidden mb-2">
-                                    <div class="card-body d-flex justify-content-between align-items-center flex-wrap">
+                        <?php endforeach; ?>
 
-                                        <div class="mb-2">
-                                            <h5 class="fw-bold mb-1 text-dark">Mutton Biryani</h5>
-                                            <p class="mb-1 text-success fw-semibold">₹550</p>
-                                        </div>
-
-                                        <div class="position-relative text-center">
-                                            <img src="assets/images/menu/mutton.avif" alt="Mutton Rogan Josh"
-                                                class="rounded mb-2"
-                                                style="width:130px; height:100px; object-fit:cover;">
-                                            <button
-                                                class="btn btn-success btn-sm fw-semibold px-4 py-1 rounded-pill shadow-sm"
-                                                style="position: absolute; bottom: -10px; left: 50%; transform: translateX(-50%);"
-                                                data-bs-toggle="modal" data-bs-target="#modal" data-id="3456781"
-                                                data-name="Mutton Biryani" data-price="550">
-                                                Add
-                                            </button>
-                                        </div>
-
-                                    </div>
-                                </div>
-                                <hr class="divider">
-                                </hr>
-                                <div class="card shadow-sm border-0 rounded-4 overflow-hidden mb-2">
-                                    <div class="card-body d-flex justify-content-between align-items-center flex-wrap">
-
-                                        <div class="mb-2">
-                                            <h5 class="fw-bold mb-1 text-dark">Mutton Ghost Biryani</h5>
-                                            <p class="mb-1 text-success fw-semibold">₹550</p>
-                                        </div>
-
-                                        <div class="position-relative text-center">
-                                            <img src="assets/images/menu/ghost-mutton-biryani.avif"
-                                                alt="Mutton Rogan Josh" class="rounded mb-2"
-                                                style="width:130px; height:100px; object-fit:cover;">
-                                            <button
-                                                class="btn btn-success btn-sm fw-semibold px-4 py-1 rounded-pill shadow-sm"
-                                                style="position: absolute; bottom: -10px; left: 50%; transform: translateX(-50%);"
-                                                data-bs-toggle="modal" data-bs-target="#modal" data-id="3456782"
-                                                data-name="Mutton Ghost Biryani" data-price="550">
-                                                Add
-                                            </button>
-
-                                        </div>
-
-                                    </div>
-                                </div>
-                                <hr class="divider">
-                                </hr>
-                                <div class="card shadow-sm border-0 rounded-4 overflow-hidden mb-2">
-                                    <div class="card-body d-flex justify-content-between align-items-center flex-wrap">
-
-                                        <div class="mb-2">
-                                            <h5 class="fw-bold mb-1 text-dark">Legend Mutton Biryani</h5>
-                                            <p class="mb-1 text-success fw-semibold">₹550</p>
-                                        </div>
-
-                                        <div class="position-relative text-center">
-                                            <img src="assets/images/menu/Legend-mutton-biryani.avif"
-                                                alt="Mutton Rogan Josh" class="rounded mb-2"
-                                                style="width:130px; height:100px; object-fit:cover;">
-                                            <button
-                                                class="btn btn-success btn-sm fw-semibold px-4 py-1 rounded-pill shadow-sm"
-                                                style="position: absolute; bottom: -10px; left: 50%; transform: translateX(-50%);"
-                                                data-bs-toggle="modal" data-bs-target="#modal" data-id="3456782"
-                                                data-name="Legend Mutton Biryani" data-price="550">
-                                                Add
-                                            </button>
-
-                                        </div>
-
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-
-                    <!-- Fran biryani -->
-                    <div class="accordion-item border-0 border-bottom rounded-3 shadow-sm mb-3">
-                        <h2 class="accordion-header">
-                            <button class="accordion-button fw-semibold bg-white" type="button"
-                                data-bs-toggle="collapse" data-bs-target="#nonVegThree" aria-expanded="true"
-                                aria-controls="nonVegThree">
-                                Prawn Dishes
-                            </button>
-                        </h2>
-                        <div id="nonVegThree" class="accordion-collapse collapse show"
-                            data-bs-parent="#nonVegAccordion">
-                            <div class="accordion-body">
-                                <div class="card shadow-sm border-0 rounded-4 overflow-hidden mb-2">
-                                    <div class="card-body d-flex justify-content-between align-items-center flex-wrap">
-
-                                        <div class="mb-2">
-                                            <h5 class="fw-bold mb-1 text-dark">prawn Biryani</h5>
-                                            <p class="mb-1 text-success fw-semibold">₹420</p>
-                                        </div>
-
-                                        <div class="position-relative text-center">
-                                            <img src="assets/images/menu/fran-biryani.avif" alt="Butter Chicken"
-                                                class="rounded mb-2"
-                                                style="width:130px; height:100px; object-fit:cover;">
-                                            <button
-                                                class="btn btn-success btn-sm fw-semibold px-4 py-1 rounded-pill shadow-sm"
-                                                style="position: absolute; bottom: -10px; left: 50%; transform: translateX(-50%);"
-                                                data-bs-toggle="modal" data-bs-target="#modal" data-id="8765431"
-                                                data-name="prawn Biryani" data-price="550">
-                                                ADD
-                                            </button>
-                                        </div>
-
-                                    </div>
-                                </div>
-                                <hr class="divider">
-                                </hr>
-                                <div class="card shadow-sm border-0 rounded-4 overflow-hidden mb-2">
-                                    <div class="card-body d-flex justify-content-between align-items-center flex-wrap">
-
-                                        <div class="mb-2">
-                                            <h5 class="fw-bold mb-1 text-dark">prawn-fry</h5>
-                                            <p class="mb-1 text-success fw-semibold">₹420</p>
-                                        </div>
-
-                                        <div class="position-relative text-center">
-                                            <img src="assets/images/menu/prawn-fry.avif" alt="Butter Chicken"
-                                                class="rounded mb-2"
-                                                style="width:130px; height:100px; object-fit:cover;">
-                                            <button
-                                                class="btn btn-success btn-sm fw-semibold px-4 py-1 rounded-pill shadow-sm"
-                                                data-bs-toggle="modal" data-bs-target="#modal" data-id="8765432"
-                                                data-name="prawn fry" data-price="550"
-                                                style="position: absolute; bottom: -10px; left: 50%; transform: translateX(-50%);">
-
-                                                ADD
-                                            </button>
-                                        </div>
-
-                                    </div>
-                                </div>
-                                <hr class="divider">
-                                </hr>
-                                <div class="card shadow-sm border-0 rounded-4 overflow-hidden mb-2">
-                                    <div class="card-body d-flex justify-content-between align-items-center flex-wrap">
-
-                                        <div class="mb-2">
-                                            <h5 class="fw-bold mb-1 text-dark">prawn-Curry</h5>
-                                            <p class="mb-1 text-success fw-semibold">₹420</p>
-                                        </div>
-
-                                        <div class="position-relative text-center">
-                                            <img src="assets/images/menu/fran-curry.avif" alt="Butter Chicken"
-                                                class="rounded mb-2"
-                                                style="width:130px; height:100px; object-fit:cover;">
-                                            <button
-                                                class="btn btn-success btn-sm fw-semibold px-4 py-1 rounded-pill shadow-sm"
-                                                data-bs-toggle="modal" data-bs-target="#modal" data-id="8765433"
-                                                data-name="prawn-Curry" data-price="550"
-                                                style="position: absolute; bottom: -10px; left: 50%; transform: translateX(-50%);">
-                                                ADD
-                                            </button>
-                                        </div>
-
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-
-                    <!-- fish biryani -->
-                    <div class="accordion-item border-0 border-bottom rounded-3 shadow-sm mb-3">
-                        <h2 class="accordion-header">
-                            <button class="accordion-button fw-semibold bg-white" type="button"
-                                data-bs-toggle="collapse" data-bs-target="#nonVegFour" aria-expanded="true"
-                                aria-controls="nonVegFour">
-                                Fish Dishes
-                            </button>
-                        </h2>
-                        <div id="nonVegFour" class="accordion-collapse collapse show" data-bs-parent="#nonVegAccordion">
-                            <div class="accordion-body">
-                                <div class="card shadow-sm border-0 rounded-4 overflow-hidden mb-2">
-                                    <div class="card-body d-flex justify-content-between align-items-center flex-wrap">
-
-                                        <div class="mb-2">
-                                            <h5 class="fw-bold mb-1 text-dark">Fish-Curry</h5>
-                                            <p class="mb-1 text-success fw-semibold">₹420</p>
-                                        </div>
-
-                                        <div class="position-relative text-center">
-                                            <img src="assets/images/menu/fish-curry.avif" alt="Butter Chicken"
-                                                class="rounded mb-2"
-                                                style="width:130px; height:100px; object-fit:cover;">
-                                            <button
-                                                class="btn btn-success btn-sm fw-semibold px-4 py-1 rounded-pill shadow-sm"
-                                                style="position: absolute; bottom: -10px; left: 50%; transform: translateX(-50%);"
-                                                data-bs-toggle="modal" data-bs-target="#modal" data-id="9123567"
-                                                data-name="Fish Curry" data-price="420">
-                                                ADD
-                                            </button>
-                                        </div>
-
-                                    </div>
-                                </div>
-                                <hr class="divider">
-                                </hr>
-                                <div class="card shadow-sm border-0 rounded-4 overflow-hidden mb-2">
-                                    <div class="card-body d-flex justify-content-between align-items-center flex-wrap">
-
-                                        <div class="mb-2">
-                                            <h5 class="fw-bold mb-1 text-dark">Fish-Fry</h5>
-                                            <p class="mb-1 text-success fw-semibold">₹420</p>
-                                        </div>
-
-                                        <div class="position-relative text-center">
-                                            <img src="assets/images/menu/fish-fry.avif" alt="Butter Chicken"
-                                                class="rounded mb-2"
-                                                style="width:130px; height:100px; object-fit:cover;">
-                                            <button
-                                                class="btn btn-success btn-sm fw-semibold px-4 py-1 rounded-pill shadow-sm"
-                                                style="position: absolute; bottom: -10px; left: 50%; transform: translateX(-50%);"
-                                                data-bs-toggle="modal" data-bs-target="#modal" data-id="9123566"
-                                                data-name="Fish Fry" data-price="420">
-
-                                                ADD
-                                            </button>
-                                        </div>
-
-                                    </div>
-                                </div>
-                                <hr class="divider">
-                                </hr>
-                                <div class="card shadow-sm border-0 rounded-4 overflow-hidden mb-2">
-                                    <div class="card-body d-flex justify-content-between align-items-center flex-wrap">
-
-                                        <div class="mb-2">
-                                            <h5 class="fw-bold mb-1 text-dark">Fish Chilli</h5>
-                                            <p class="mb-1 text-success fw-semibold">₹420</p>
-                                        </div>
-
-                                        <div class="position-relative text-center">
-                                            <img src="assets/images/menu/fish-chilli.avif" alt="Butter Chicken"
-                                                class="rounded mb-2"
-                                                style="width:130px; height:100px; object-fit:cover;">
-                                            <button
-                                                class="btn btn-success btn-sm fw-semibold px-4 py-1 rounded-pill shadow-sm"
-                                                style="position: absolute; bottom: -10px; left: 50%; transform: translateX(-50%);"
-                                                data-bs-toggle="modal" data-bs-target="#modal" data-id="9123565"
-                                                data-name="Fish Chilli" data-price="420">
-                                                ADD
-                                            </button>
-                                        </div>
-
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-
-                </div><!-- /Non-Veg Accordion -->
-            </div>
-        </section>
-
-
-        <!-- Stater -->
-        <section class="py-4" style="background-color: #f1f1f1;">
-            <div class="container">
-                <h3 class="fw-bold mb-4 text-center text-danger">Non-Veg Staters</h3>
-                <div class="accordion" id="staterAccordion">
-                    <!-- kebab -->
-                    <div class="accordion-item border-0 border-bottom rounded-3 shadow-sm mb-3">
-                        <h2 class="accordion-header">
-                            <button class="accordion-button fw-semibold bg-white" type="button"
-                                data-bs-toggle="collapse" data-bs-target="#staterOne" aria-expanded="true"
-                                aria-controls="staterOne">
-                                Chicken kebab
-                            </button>
-                        </h2>
-                        <div id="staterOne" class="accordion-collapse collapse show" data-bs-parent="#staterAccordion">
-                            <div class="accordion-body">
-                                <div class="card shadow-sm border-0 rounded-4 overflow-hidden mb-2">
-                                    <div class="card-body d-flex justify-content-between align-items-center flex-wrap">
-
-                                        <div class="mb-2">
-                                            <h5 class="fw-bold mb-1 text-dark">dry Chicken</h5>
-                                            <p class="mb-1 text-success fw-semibold">₹420</p>
-                                        </div>
-
-                                        <div class="position-relative text-center">
-                                            <img src="assets/images/menu/chilli-chicken.avif" alt="Butter Chicken"
-                                                class="rounded mb-2"
-                                                style="width:130px; height:100px; object-fit:cover;">
-                                            <button
-                                                class="btn btn-success btn-sm fw-semibold px-4 py-1 rounded-pill shadow-sm"
-                                                style="position: absolute; bottom: -10px; left: 50%; transform: translateX(-50%);">
-                                                ADD
-                                            </button>
-                                        </div>
-
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                    <!-- apollo fish -->
-                    <div class="accordion-item border-0 border-bottom rounded-3 shadow-sm mb-3">
-                        <h2 class="accordion-header">
-                            <button class="accordion-button fw-semibold bg-white" type="button"
-                                data-bs-toggle="collapse" data-bs-target="#staterTwo" aria-expanded="true"
-                                aria-controls="staterTwo">
-                                Appolo Fish
-                            </button>
-                        </h2>
-                        <div id="staterTwo" class="accordion-collapse collapse show" data-bs-parent="#staterAccordion">
-                            <div class="accordion-body">
-                                <div class="card shadow-sm border-0 rounded-4 overflow-hidden mb-2">
-                                    <div class="card-body d-flex justify-content-between align-items-center flex-wrap">
-
-                                        <div class="mb-2">
-                                            <h5 class="fw-bold mb-1 text-dark">Appolo Fish</h5>
-                                            <p class="mb-1 text-success fw-semibold">₹420</p>
-                                        </div>
-
-                                        <div class="position-relative text-center">
-                                            <img src="assets/images/menu/fish-chilli.avif" alt="Butter Chicken"
-                                                class="rounded mb-2"
-                                                style="width:130px; height:100px; object-fit:cover;">
-                                            <button
-                                                class="btn btn-success btn-sm fw-semibold px-4 py-1 rounded-pill shadow-sm"
-                                                style="position: absolute; bottom: -10px; left: 50%; transform: translateX(-50%);">
-                                                ADD
-                                            </button>
-                                        </div>
-
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                    <!--lallipop  -->
-                    <div class="accordion-item border-0 border-bottom rounded-3 shadow-sm mb-3">
-                        <h2 class="accordion-header">
-                            <button class="accordion-button fw-semibold bg-white" type="button"
-                                data-bs-toggle="collapse" data-bs-target="#staterThree" aria-expanded="true"
-                                aria-controls="staterThree">
-                                Lollipops
-                            </button>
-                        </h2>
-                        <div id="staterThree" class="accordion-collapse collapse show"
-                            data-bs-parent="#staterAccordion">
-                            <div class="accordion-body">
-                                <div class="card shadow-sm border-0 rounded-4 overflow-hidden mb-2">
-                                    <div class="card-body d-flex justify-content-between align-items-center flex-wrap">
-
-                                        <div class="mb-2">
-                                            <h5 class="fw-bold mb-1 text-dark">Lollipops</h5>
-                                            <p class="mb-1 text-success fw-semibold">₹420</p>
-                                        </div>
-
-                                        <div class="position-relative text-center">
-                                            <img src="assets/images/menu/Lollipop.avif" alt="Butter Chicken"
-                                                class="rounded mb-2"
-                                                style="width:130px; height:100px; object-fit:cover;">
-                                            <button
-                                                class="btn btn-success btn-sm fw-semibold px-4 py-1 rounded-pill shadow-sm"
-                                                style="position: absolute; bottom: -10px; left: 50%; transform: translateX(-50%);">
-                                                ADD
-                                            </button>
-                                        </div>
-
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                    <!--Chicken Manchurian -->
-                    <div class="accordion-item border-0 border-bottom rounded-3 shadow-sm mb-3">
-                        <h2 class="accordion-header">
-                            <button class="accordion-button fw-semibold bg-white" type="button"
-                                data-bs-toggle="collapse" data-bs-target="#staterFour" aria-expanded="true"
-                                aria-controls="staterFour">
-                                Chicken Manchurian
-                            </button>
-                        </h2>
-                        <div id="staterFour" class="accordion-collapse collapse show" data-bs-parent="#staterAccordion">
-                            <div class="accordion-body">
-                                <div class="card shadow-sm border-0 rounded-4 overflow-hidden mb-2">
-                                    <div class="card-body d-flex justify-content-between align-items-center flex-wrap">
-
-                                        <div class="mb-2">
-                                            <h5 class="fw-bold mb-1 text-dark"> Chicken Manchurian</h5>
-                                            <p class="mb-1 text-success fw-semibold">₹420</p>
-                                        </div>
-
-                                        <div class="position-relative text-center">
-                                            <img src="assets/images/menu/chicken-manchurian.avif" alt="Butter Chicken"
-                                                class="rounded mb-2"
-                                                style="width:130px; height:100px; object-fit:cover;">
-                                            <button
-                                                class="btn btn-success btn-sm fw-semibold px-4 py-1 rounded-pill shadow-sm"
-                                                style="position: absolute; bottom: -10px; left: 50%; transform: translateX(-50%);">
-                                                ADD
-                                            </button>
-                                        </div>
-
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
                     </div>
                 </div>
             </div>
-        </section>
+
+            <?php 
+            $i++;
+            endforeach; 
+            ?>
+
+        </div>
+    </div>
+</section>
+
+
+        <!-- Stater -->
+      <?php
+// Fetch all non-veg starters from DB
+$sql = "SELECT * FROM order_list";
+$result = mysqli_query($con, $sql);
+
+// Group starters into accordion categories
+$starterCategories = [
+    "Chicken kebab" => [],
+    "Appolo Fish" => [],
+    "Lollipops" => [],
+    "Chicken Manchurian" => []
+];
+
+while ($row = mysqli_fetch_assoc($result)) {
+
+    $name = strtolower($row['order_name']);
+
+    if (strpos($name, 'kebab') !== false || strpos($name, 'dry') !== false) {
+        $starterCategories["Chicken kebab"][] = $row;
+    }
+    elseif (strpos($name, 'apollo') !== false || strpos($name, 'fish') !== false) {
+        $starterCategories["Appolo Fish"][] = $row;
+    }
+    elseif (strpos($name, 'lollipop') !== false) {
+        $starterCategories["Lollipops"][] = $row;
+    }
+    elseif (strpos($name, 'manchurian') !== false) {
+        $starterCategories["Chicken Manchurian"][] = $row;
+    }
+}
+?>
+
+<section class="py-4" style="background-color: #f1f1f1;">
+    <div class="container">
+        <h3 class="fw-bold mb-4 text-center text-danger">Non-Veg Starters</h3>
+
+        <div class="accordion" id="staterAccordion">
+
+            <?php 
+            $i = 1;
+            foreach ($starterCategories as $title => $items): 
+            ?>
+
+            <div class="accordion-item border-0 border-bottom rounded-3 shadow-sm mb-3">
+                <h2 class="accordion-header">
+                    <button class="accordion-button fw-semibold bg-white" type="button"
+                        data-bs-toggle="collapse" data-bs-target="#starter<?= $i ?>"
+                        aria-expanded="true">
+                        <?= $title ?>
+                    </button>
+                </h2>
+
+                <div id="starter<?= $i ?>" class="accordion-collapse collapse show"
+                     data-bs-parent="#staterAccordion">
+
+                    <div class="accordion-body">
+
+                        <?php if (empty($items)): ?>
+                            <p class="text-muted">No items available.</p>
+                        <?php endif; ?>
+
+                        <?php foreach ($items as $item): ?>
+                        <div class="card shadow-sm border-0 rounded-4 overflow-hidden mb-2">
+                            <div class="card-body d-flex justify-content-between align-items-center flex-wrap">
+
+                                <div class="mb-2">
+                                    <h5 class="fw-bold mb-1 text-dark"><?= $item['order_name'] ?></h5>
+                                    <p class="mb-1 text-success fw-semibold">₹<?= $item['order_price'] ?></p>
+                                </div>
+
+                                <div class="position-relative text-center">
+                                    <img src="<?= $item['item_photo'] ?>" class="rounded mb-2"
+                                        style="width:130px; height:100px; object-fit:cover;">
+
+                                    <button class="btn btn-success btn-sm fw-semibold px-4 py-1 rounded-pill shadow-sm"
+                                        style="position:absolute; bottom:-10px; left:50%; transform:translateX(-50%);"
+                                        data-bs-toggle="modal"
+                                        data-bs-target="#modal"
+                                        data-id="<?= $item['order_id'] ?>"
+                                        data-name="<?= $item['order_name'] ?>"
+                                        data-price="<?= $item['order_price'] ?>">
+                                        ADD
+                                    </button>
+                                </div>
+
+                            </div>
+                        </div>
+                        <?php endforeach; ?>
+
+                    </div>
+                </div>
+
+            </div>
+
+            <?php 
+            $i++;
+            endforeach; 
+            ?>
+
+        </div>
+    </div>
+</section>
 
 
         <!-- ✅ Place Order Modal -->
