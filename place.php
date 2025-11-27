@@ -82,7 +82,7 @@
                             </li>
 
                             <li><a class="dropdown-item" href="#"><i class="bi bi-gear"></i> Settings</a></li>
-                            <li><a class="dropdown-item" href="#"><i class="bi bi-cart-check"></i> Orders</a></li>
+                            <li><a class="dropdown-item" href="order.php"><i class="bi bi-cart-check"></i> Orders</a></li>
                             <li>
                                 <hr class="dropdown-divider">
                             </li>
@@ -107,7 +107,7 @@
         </nav>
     </header>
     <!-- menu -->
-    <main>
+<main>
         <!-- ✅ Section 1: Veg Dishes -->
 <section class="py-4" style="background-color: #f1f1f1;">
     <div class="container">
@@ -581,7 +581,15 @@ while ($row = mysqli_fetch_assoc($result)) {
             });
         </script>
 
-
+<footer class="sticky">
+ <section class="bg-dark text-white py-3">
+      <div class="container">
+         <div class="text-white text-center  mt-0">
+    <p class="mb-0 fw-bold">© Copyright MyWebsite All Rights Reserved</p>
+  </div>
+      </div>
+    </section>
+</footer>
     </main>
 </body>
 

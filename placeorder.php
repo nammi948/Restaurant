@@ -23,12 +23,17 @@ $grandTotal = $priceTotal + $deliveryFee;
 /* ----------------------------------------------------
    1️⃣ Save ORDER in orders table
 ---------------------------------------------------- */
-$sql = "INSERT INTO orders (user_name, phone, house, street, city, pincode, total_amount, delivery_fee, grand_total)
-        VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?)";
+/* ----------------------------------------------------
+   1️⃣ Save ORDER in orders table
+---------------------------------------------------- */
+$sql = "INSERT INTO orders (item_id,item_name,user_name, phone, house, street, city, pincode, total_amount, delivery_fee, grand_total)
+        VALUES (? , ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)";
 
 $stmt = $con->prepare($sql);
 $stmt->bind_param(
-    "ssssssddd",
+    "isssssssddd",
+    $item['id'],
+    $item['name'],
     $user['name'],
     $user['phone'],
     $user['house'],
@@ -40,41 +45,48 @@ $stmt->bind_param(
     $grandTotal
 );
 
-if ($stmt->execute()) {
-    $orderId = $stmt->insert_id; // 📌 New Order ID
-} else {
+if (!$stmt->execute()) {
     die("Order save failed: " . $stmt->error);
 }
 
 /* ----------------------------------------------------
-   2️⃣ Save ITEMS into order_items table
+   Save ITEMS directly into order_items table 
+   (NO order_id required)
 ---------------------------------------------------- */
-foreach ($cart as $item) {
-    $sql2 = "INSERT INTO order_items (order_id, item_id, item_name, price, qty, total)
-             VALUES (?, ?, ?, ?, ?, ?)";
 
-    $stmt2 = $con->prepare($sql2);
-    $stmt2->bind_param(
-        "iisddd",
-        $orderId,
+foreach ($cart as $item) {
+
+    $sql = "INSERT INTO order_items (item_id, item_name,user_id, price, qty, total)
+            VALUES (?, ?, ?,?, ?, ?)";
+
+    $stmt = $con->prepare($sql);
+    $stmt->bind_param(
+        "isiddd",
         $item['id'],
         $item['name'],
+        $user['id'],
         $item['price'],
         $item['qty'],
         $item['total']
     );
-    $stmt2->execute();
+
+    if (!$stmt->execute()) {
+        die("Failed to save item: " . $stmt->error);
+    }
 }
 
 /* ----------------------------------------------------
-   3️⃣ Clear Cart after successful order
+   Clear Cart
 ---------------------------------------------------- */
 unset($_SESSION['cart']);
 
+/* ----------------------------------------------------
+   Success Message
+---------------------------------------------------- */
 echo "
 <script>
-alert('🎉 Order Placed Successfully! Order ID: $orderId');
-window.location='success.php?order_id=$orderId';
+alert('🎉 Order Placed Successfully!');
+window.location = 'success.php';
 </script>
 ";
 

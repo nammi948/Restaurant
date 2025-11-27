@@ -84,7 +84,7 @@
             </li>
 
             <li class="nav-item">
-                <a class="nav-link text-light" href="#order">
+                <a class="nav-link text-light" href="admin_view.php">
                     <i class="fa-solid fa-cart-shopping me-2"></i> Order
                 </a>
             </li>

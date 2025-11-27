@@ -13,7 +13,7 @@
 
 <body>
     <header class="sticky-top">
-        <nav class="navbar navbar-expand-lg bg-body-secondary">
+        <nav class="navbar navbar-expand-lg" style="  background-color:#070C20;">
             <a class="navbar-brand px-5 d-flex align-items-center" href="#">
         <img class="navbar-logo img-fluid rounded-circle me-2" src="assets/images/logo1.jpg" alt="Logo" style="width:80px; height:80px;">
        </a>
@@ -25,23 +25,23 @@
                 <div class="collapse navbar-collapse" id="navbarSupportedContent">
                     <ul class="navbar-nav mx-auto mb-2 mb-lg-0 px-5">
                         <li class="nav-item">
-                          <a class="nav-link active fw-semibold"  aria-current="page" href="#home" style="font-size: 20px;">Home</a>
+                          <a class="nav-link active fw-semibold text-white"  aria-current="page" href="#home" style="font-size: 20px;">Home</a>
 
                         </li>
                         <li class="nav-item">
-                            <a class="nav-link  fw-semibold" href="#about" style="font-size: 20px;">About</a>
+                            <a class="nav-link  fw-semibold text-white" href="#about" style="font-size: 20px;">About</a>
                         </li>
                         <li class="nav-item">
-                            <a class="nav-link  fw-semibold" href="#menu" style="font-size: 20px; ">Menu</a>
+                            <a class="nav-link  fw-semibold text-white" href="#menu" style="font-size: 20px; ">Menu</a>
                         </li>
                         <li class="nav-item">
-                            <a class="nav-link  fw-semibold" href="#chef" style="font-size: 20px; ">Chefs</a>
+                            <a class="nav-link  fw-semibold text-white" href="#chef" style="font-size: 20px; ">Chefs</a>
                         </li>
                         <li class="nav-item">
-                            <a class="nav-link  fw-semibold" href="#event" style="font-size: 20px; ">Events</a>
+                            <a class="nav-link  fw-semibold text-white" href="#event" style="font-size: 20px; ">Events</a>
                         </li>
                         <li class="nav-item dropdown">
-                            <a class="nav-link dropdown-toggle  fw-semibold" href="#" role="button" data-bs-toggle="dropdown"
+                            <a class="nav-link dropdown-toggle  fw-semibol text-white" href="#" role="button" data-bs-toggle="dropdown"
                                 aria-expanded="false" style="font-size: 20px;">
                                 Dropdown
                             </a>
@@ -55,21 +55,40 @@
                             </ul>
                         </li>
                         <li class="nav-item">
-                            <a class="nav-link  fw-semibold" href="#contact" style="font-size: 20px;">Contact</a>
+                            <a class="nav-link  fw-semibold text-white" href="#contact" style="font-size: 20px;">Contact</a>
                         </li>
                     </ul>
                     <div class="div">
-                        <button class="btn btn-outline-success btn-sm m-3" data-bs-toggle="modal"
+                        <button class="btn btn-warning btn-sm m-3" data-bs-toggle="modal"
                             data-bs-target="#modal6">Sign Up</button>
-                        <button class="btn btn-outline-danger btn-sm " data-bs-toggle="modal"
+                        <button class="btn btn-danger btn-sm mx-3 " data-bs-toggle="modal"
                             data-bs-target="#modal2">Login</button>
                     </div>
-                </div>
+                </div>`
+
             </div>
         </nav>
     </header>
 
     <main>
+        <!-- Carousel -->
+         <section class="mt-2">
+            <div class="container-fluid">
+                <div id="carouselExampleSlidesOnly" class="carousel slide" data-bs-ride="carousel">
+                  <div class="carousel-inner">
+                    <div class="carousel-item active h-100">
+                       <img src="assets/images/carousel1.png" class="d-block w-100" alt="...">
+                        </div>
+                       <div class="carousel-item h-100">
+                       <img src="assets/images/carousel2.png" class="d-block w-100" alt="...">
+                         </div>
+                           <div class="carousel-item h-100">
+                         <img src="assets/images/carousel3.png" class="d-block w-100" alt="...">
+                             </div>
+                         </div>
+                        </div>
+                    </div>
+            </section>
         <!-- HOME PAGE -->
         <section class="py-5" id="home">
             <div class="container">
@@ -195,12 +214,12 @@
                 </h1>
                 <div class="row g-4">
                     <div class="col-md-3 d-flex">
-                        <div class="card w-100 h-100 shadow-sm text-center">
+                        <div class="card w-100 h-100 shadow-sm text-center " style="background-color: #ff7f33;">
                             <img src="assets/images/Chef-Sanjeev-Kapoor_2.avif" class="card-img-top img-fluid"
                                 alt="Sanjeev Kapoor" style="height:250px; object-fit:cover;">
                             <div class="card-body d-flex flex-column">
                                 <h4 class="card-title">Sanjeev Kapoor</h4>
-                                <p class="card-text mt-auto">
+                                <p class="card-text mt-auto text-white fw-semibold">
                                     “Cooking is an art that speaks to the soul — every dish tells a story.”
                                     <br>“A great meal begins long before the first bite; it starts with passion,
                                     patience, and creativity.”
@@ -209,12 +228,12 @@
                         </div>
                     </div>
                     <div class="col-md-3 d-flex">
-                        <div class="card w-100 h-100 shadow-sm text-center">
+                        <div class="card w-100 h-100 shadow-sm text-center" style="background-color:#20c997;">
                             <img src="assets/images/vikas" class="card-img-top img-fluid" alt="Vikas Khanna"
                                 style="height:250px; object-fit:cover;">
                             <div class="card-body d-flex flex-column">
                                 <h4 class="card-title">Vikas Khanna</h4>
-                                <p class="card-text mt-auto">
+                                <p class="card-text mt-auto text-white fw-semibold">
                                     “For me, food is a language — it connects people without words.”
                                     <br>“The secret ingredient in every recipe is love and attention to detail.”
                                 </p>
@@ -222,12 +241,12 @@
                         </div>
                     </div>
                     <div class="col-md-3 d-flex">
-                        <div class="card w-100 h-100 shadow-sm text-center">
+                        <div class="card w-100 h-100 shadow-sm text-center" style="background-color:#7950f2;">
                             <img src="assets/images/ranbeer" class="card-img-top img-fluid" alt="Ranveer Brar"
                                 style="height:250px; object-fit:cover;">
                             <div class="card-body d-flex flex-column">
                                 <h4 class="card-title">Ranveer Brar</h4>
-                                <p class="card-text mt-auto">
+                                <p class="card-text mt-auto text-white fw-semibold">
                                     “I don’t just cook food, I create memories on a plate.”
                                     <br>“Every spice, every flavor has a purpose — together they create harmony.”
                                 </p>
@@ -235,12 +254,12 @@
                         </div>
                     </div>
                     <div class="col-md-3 d-flex">
-                        <div class="card w-100 h-100 shadow-sm text-center">
+                        <div class="card w-100 h-100 shadow-sm text-center" style="background-color:#6c757d;">
                             <img src="assets/images/chef-kunal-.avif" class="card-img-top img-fluid" alt="Kunal Kapur"
                                 style="height:250px; object-fit:cover;">
                             <div class="card-body d-flex flex-column">
                                 <h4 class="card-title">Kunal Kapur</h4>
-                                <p class="card-text mt-auto">
+                                <p class="card-text mt-auto text-white fw-semibold">
                                     “Cooking isn’t about following rules; it’s about creating emotions.”
                                     <br>“My kitchen is my canvas, and every dish is a piece of art.”
                                 </p>
@@ -319,7 +338,7 @@
                 </h1>
                 <div class="row py-5 g-4">
                     <div class="col-md-4">
-                        <div class="card text-center">
+                        <div class="card text-center bg-success">
                             <img src="assets/images/chef-4.webp" class="img-fluid mx-auto mt-4" alt="Circular img"
                                 style="border-radius: 50%; width: 150px; height: 150px;">
                             <div class="card-body">
@@ -331,7 +350,7 @@
                         </div>
                     </div>
                     <div class="col-md-4">
-                        <div class="card text-center">
+                        <div class="card text-center bg-danger">
                             <img src="assets/images/chef-4.webp" class="img-fluid mx-auto mt-4" alt="Circular img"
                                 style="border-radius: 50%; width: 150px; height: 150px;">
                             <div class="card-body">
@@ -345,7 +364,7 @@
                         </div>
                     </div>
                     <div class="col-md-4">
-                        <div class="card text-center">
+                        <div class="card text-center bg-warning">
                             <img src="assets/images/chef-4.webp" class="img-fluid mx-auto mt-4" alt="Circular img"
                                 style="border-radius: 50%; width: 150px; height: 150px;">
                             <div class="card-body ">
@@ -743,7 +762,7 @@
           <!-- Column 1 -->
           <div class="col-md-3">
             <h6 class="fw-bold">Company</h6>
-            <hr class="w-25 border-3 border-light">
+            <hr class="divider border-3  border-light w-25">
             <p>About Us</p>
             <p>Restaurant Corporate</p>
           </div>

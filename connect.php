@@ -5,3 +5,4 @@ $pass="";
 $db="restaurant_db";
 
   $con=mysqli_connect($host,$user,$pass,$db);
+?>
