@@ -1,64 +1,70 @@
-<?php include 'connect.php';?>
-<?php
+<?php 
+include 'connect.php';
 session_start();
+
 if (isset($_POST['login'])) {
-    $username = $_POST['name'];
-    $password = $_POST['password'];
 
-    // Check user in database
-    $query = "SELECT * FROM register WHERE name='$username' AND password='$password'";
-    $result = mysqli_query($con, $query);
+    $names = $_POST['name'];        // array
+    $passwords = $_POST['password']; // array
 
-    if (mysqli_num_rows($result) > 0) {
-        $row = mysqli_fetch_assoc($result); // fetch user data
+    $totalUsers = count($names);     // count how many users submitted
 
-        // Prepare user data for JS (as JSON)
-        $userData = json_encode($row);
+    for ($i = 0; $i < $totalUsers; $i++) {
 
-        $_SESSION['user_data']= $row;
+        $username = $names[$i];
+        $password = $passwords[$i];
 
-        $role = $row['user'];
-        if ($role === 'admin') {
-            header("Location: dash.php");
-            exit;
-        }elseif($role === 'client'){
-             echo "
-        <script>
-            localStorage.setItem('user_info', JSON.stringify($userData));
-            alert('Login Successful');
-            window.location = 'place.php';
-        </script>
-        ";
-            //  header("Location: place.php");
-            exit;
+        // Validate empty entries (important)
+        if ($username == "" || $password == "") {
+            continue;
         }
-        else {
+
+        // Check user in database
+        $query = "SELECT * FROM register WHERE name='$username' AND password='$password'";
+        $result = mysqli_query($con, $query);
+
+        if (mysqli_num_rows($result) > 0) {
+
+            $row = mysqli_fetch_assoc($result);
+            $role = $row['user'];
+
+            // Store each logged-in user
+            $_SESSION['logged_users'][] = $row;
+
+            // Redirect based on role
+            // if ($role === 'admin') {
+            //     localStorage.setItem("user_info",$username);
+            //     echo "<script>alert('Admin $username Login Successful');</script>";
+            //     echo "<script>window.location='dash.php';</script>";
+            // } 
+            // elseif ($role === 'client') {
+            //     localStorage.setItem("user_info",$username);
+            //     echo "<script>alert('Client $username Login Successful');</script>";
+            // }
+
+            if ($role === 'admin') {
+    $_SESSION['user_data'] = $username;
+    $_SESSION['id'] = $row['id'];
+
+    echo "<script>alert('Admin $username Login Successful');</script>";
+    echo "<script>window.location='dash.php';</script>";
+}
+elseif ($role === 'client') {
+    $_SESSION['user_data'] = $username;
+    $_SESSION['id'] = $row['id'];
+
+    echo "<script>alert('User $username Login Successful');</script>";
+    echo "<script>window.location='place.php';</script>";
+}
 
 
-    //     echo "<script>
-    //     alert(' Login Failed! Please check your username or password.');
-    //     window.location.href='dash.php';
-    //   </script>";
+        } else {
 
-        // echo "
-        // <script>
-        //     localStorage.setItem('user_info', JSON.stringify($userData));
-        //     alert('Login Successful');
-        //     window.location = 'place.php';
-        // </script>
-        // ";
-
+            echo "<script>alert('Login failed for username: $username');</script>";
+        }
     }
-        // ✅ Store all info in localStorage via JavaScript
-        // echo "
-        // <script>
-        //     localStorage.setItem('user_info', JSON.stringify($userData));
-        //     alert('Login Successful');
-        //     window.location = 'place.php';
-        // </script>
-        // ";
-    } else {
-        echo "<script>alert('Oops! login details are incorrect. Try again.'); window.location.href='index.php'</script>";
-    }
+
+    // After the loop finishes
+    echo "<script>window.location='place.php';</script>";
 }
 ?>

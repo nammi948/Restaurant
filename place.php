@@ -1,4 +1,32 @@
-<?php   include 'connect.php';?>
+<?php
+include 'connect.php';
+session_start();
+
+// Check if session exists
+if (!isset($_SESSION['user_data'])) {
+    echo "<script>alert('Please login first'); window.location='login.php';</script>";
+    exit();
+}
+
+// Logged-in user info stored from login.php
+$user = $_SESSION['user_data'];
+$id   = $_SESSION['id'];   // <-- logged-in user's ID
+
+
+$query = "SELECT * FROM register WHERE id = '$id'";
+$result = mysqli_query($con, $query);
+
+if ($result && mysqli_num_rows($result) > 0) {
+    $row = mysqli_fetch_assoc($result);
+
+    // Output to console
+    echo "<script>console.log('User data:', " . json_encode($row) . ");</script>";
+} else {
+    echo "<script>alert('No user found'); window.location='index.php';</script>";
+    exit();
+}
+?>
+
 <!doctype html>
 <html lang="en">
 
@@ -36,7 +64,7 @@
 <body>
     <!-- header -->
     <header class="sticky-top">
-        <nav class="navbar navbar-expand-lg bg-body-secondary">
+        <nav class="navbar navbar-expand-lg " style="background-color: 	#505c76;">
             <a class="navbar-brand px-5 d-flex align-items-center" href="#">
                 <img class="navbar-logo img-fluid rounded-circle me-2" src="assets/images/logo1.jpg" alt="Logo"
                     style="width:80px; height:80px;">
@@ -62,23 +90,31 @@
 
                         <ul class="dropdown-menu dropdown-menu-end shadow">
                             <li>
-                                <a class="dropdown-item" href="#" onclick="openProfile()">
+                                <a class="dropdown-item" href="user.php" onclick="openProfile()">
                                     <i class="bi bi-person"></i> My Profile
                                 </a>
-                                <script>
+                                 <script>
                                     function openProfile() {
-                                        let user = JSON.parse(localStorage.getItem("user_info"));
+                                        // let user = JSON.parse(localStorage.getItem("user_info"));
 
-                                        if (user && user.id) {
-                                            console.log(user.id, "user id");
+                                        // if (user && user.id) {
+                                        //     console.log(user.id, "user id");
 
-                                            window.location.href = "user.php?id=" + user.id; // ✅ pass ID dynamically
+                                        //     window.location.href = "user.php?id=" + user.id; // ✅ pass ID dynamically
+                                        // } else {
+                                        //     alert("User not logged in");
+                                        //     window.location.href = "login.php";
+                                        // }
+
+                                        let userId = <?= json_encode($id); ?>;
+                                        if (userId) {
+                                            window.location.href = "user.php?id=" + userId;
                                         } else {
                                             alert("User not logged in");
                                             window.location.href = "login.php";
-                                        }
                                     }
-                                </script>
+                                    
+                                </script> 
                             </li>
 
                             <li><a class="dropdown-item" href="#"><i class="bi bi-gear"></i> Settings</a></li>
@@ -100,8 +136,15 @@
 
                 </ul>
                 <div class="button">
-                    <a href="index.php" class="btn btn-outline-danger btn-sm m-3">Logout</a>
+                    <a href="index.php" class="btn btn-danger btn-sm m-3" onclick="onLogout()">Logout</a>
                 </div>
+                <Script>
+                    function onLogout() {
+                        console.log("jhgjhg");
+                        
+                        localStorage.removeItem("user_info");
+                    }
+                    </Script>
             </div>
             </div>
         </nav>

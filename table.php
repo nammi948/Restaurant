@@ -19,6 +19,7 @@ if (isset($_POST['update'])) {
     }
 }
 
+
 // DELETE data
 if (isset($_POST['delete'])) {
     $id = $_POST['student_id'];
@@ -49,6 +50,15 @@ if (!$res) {
   <title>Restaurant Dashboard</title>
   <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.8/dist/css/bootstrap.min.css" rel="stylesheet">
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css">
+<!-- DataTables CSS -->
+<link rel="stylesheet" href="https://cdn.datatables.net/1.13.6/css/dataTables.bootstrap5.min.css">
+
+<!-- jQuery -->
+<script src="https://code.jquery.com/jquery-3.7.1.min.js"></script>
+
+<!-- DataTables JS -->
+<script src="https://cdn.datatables.net/1.13.6/js/jquery.dataTables.min.js"></script>
+<script src="https://cdn.datatables.net/1.13.6/js/dataTables.bootstrap5.min.js"></script>
 
   <style>
     body {
@@ -158,23 +168,25 @@ if (!$res) {
       <div class="container">
         <h2 class="mb-4 text-center fw-bold">Customer Details</h2>
         <div class="table-responsive shadow-lg bg-white p-3 rounded">
-          <table class="table table-bordered table-striped align-middle text-center">
-            <thead class="table-dark">
-              <tr>
-                <th>ID</th>
-                <th>Name</th>
-                <th>Password</th>
-                <th>Email</th>
-                <th>Mobile</th>
-                <th>Current</th>
-                <th>Updated</th>
-                <th>Action</th>
-              </tr>
-            </thead>
-            <tbody>
-              <?php if (mysqli_num_rows($res) > 0): ?>
-                <?php while ($user = mysqli_fetch_assoc($res)): ?>
-                  <tr>
+         <div class="table-responsive">
+<table id="userTable" class="table table-bordered table-striped align-middle text-center">
+    <thead class="table-dark">
+        <tr>
+            <th>ID</th>
+            <th>Name</th>
+            <th>Password</th>
+            <th>Email</th>
+            <th>Mobile</th>
+            <th>Current</th>
+            <th>Updated</th>
+            <th>Action</th>
+        </tr>
+    </thead>
+
+    <tbody>
+        <?php if (mysqli_num_rows($res) > 0): ?>
+            <?php while ($user = mysqli_fetch_assoc($res)): ?>
+                <tr>
                     <td><?= htmlspecialchars($user['id']); ?></td>
                     <td><?= htmlspecialchars($user['name']); ?></td>
                     <td><?= htmlspecialchars($user['password']); ?></td>
@@ -183,29 +195,33 @@ if (!$res) {
                     <td><?= htmlspecialchars($user['created_at'] ?? '-'); ?></td>
                     <td><?= htmlspecialchars($user['updated_at'] ?? '-'); ?></td>
                     <td>
-                      <button class="btn btn-sm btn-primary editBtn"
-                        data-id="<?= $user['id']; ?>"
-                        data-name="<?= $user['name']; ?>"
-                        data-password="<?= $user['password']; ?>"
-                        data-email="<?= $user['email']; ?>"
-                        data-phone="<?= $user['phone']; ?>"
-                        data-bs-toggle="modal"
-                        data-bs-target="#update">Edit</button>
+                        <button class="btn btn-sm btn-primary editBtn"
+                                data-id="<?= $user['id']; ?>"
+                                data-name="<?= $user['name']; ?>"
+                                data-password="<?= $user['password']; ?>"
+                                data-email="<?= $user['email']; ?>"
+                                data-phone="<?= $user['phone']; ?>"
+                                data-bs-toggle="modal" data-bs-target="#update">
+                                Edit
+                        </button>
 
-                      <button class="btn btn-sm btn-danger deleteBtn"
-                        data-id="<?= $user['id']; ?>"
-                        data-bs-toggle="modal"
-                        data-bs-target="#delete">Delete</button>
+                        <button class="btn btn-sm btn-danger deleteBtn"
+                                data-id="<?= $user['id']; ?>"
+                                data-bs-toggle="modal" data-bs-target="#delete">
+                                Delete
+                        </button>
                     </td>
-                  </tr>
-                <?php endwhile; ?>
-              <?php else: ?>
-                <tr>
-                  <td colspan="8" class="text-center text-danger">No users found.</td>
                 </tr>
-              <?php endif; ?>
-            </tbody>
-          </table>
+            <?php endwhile; ?>
+        <?php else: ?>
+            <tr>
+                <td colspan="8" class="text-center text-danger">No users found.</td>
+            </tr>
+        <?php endif; ?>
+    </tbody>
+</table>
+</div>
+
         </div>
       </div>
     </section>
@@ -291,6 +307,15 @@ if (!$res) {
       });
     });
   </script>
+<script>
+$(document).ready(function () {
+    $('#userTable').DataTable({
+        "pageLength": 5,
+        "lengthMenu": [5, 10, 25, 50, 100],
+        "scrollX": true,
+    });
+});
+</script>
 
   <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.8/dist/js/bootstrap.bundle.min.js"></script>
 </body>

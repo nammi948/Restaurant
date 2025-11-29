@@ -61,6 +61,18 @@ if (isset($_GET['remove'])) {
     header("Location: cart.php");
     exit;
 }
+$user = $_SESSION['user_data'];
+$id   = $_SESSION['id'];
+
+$query = "SELECT * FROM register WHERE id='$id'";
+$result = mysqli_query($con, $query);
+
+if (!$result || mysqli_num_rows($result) == 0) {
+    echo "<script>alert('No user found'); window.location='login.php';</script>";
+    exit();
+}
+
+$row = mysqli_fetch_assoc($result); // Fetch user data
 ?>
 <!doctype html>
 <html lang="en">
@@ -135,7 +147,7 @@ if (isset($_GET['remove'])) {
     </header>
 <main>
 <section class="d-flex justify-content-center mt-4">
-<div class="col-md-4">
+<div class="col-md-6">
     <div class="card shadow-sm p-3">
 
     <table class="table table-bordered table-striped align-middle  table-sm">
@@ -214,23 +226,24 @@ if (isset($_GET['remove'])) {
  <div class="d-flex justify-content-between fw-bold mb-3 gap-4">
          <h6 class="mb-2">
                     <strong>Name:</strong> 
-                    <?php echo $_SESSION['user_data']['name']; ?>
+                    <?= $row['name']; ?>
                 </h6>
      
   <p class="mb-1">
                         <strong>Address:</strong><br>
-                        <?php 
-                            echo $_SESSION['user_data']['house'] . ", ";
-                            echo $_SESSION['user_data']['street'] . ", ";
-                            echo $_SESSION['user_data']['city'] . "<br>";
-                            echo "Pincode: " . $_SESSION['user_data']['pincode'];
-                        ?>
+                          <?= $row['house']; ?>,
+                        <?= $row['street']; ?>,
+                        <?= $row['city']; ?>,
+                        <?= $row['state']; ?>.<br>
+                        Pincode:<?= $row['pincode']; ?>
                     </p>
 
                     <p class="mt-2">
                         <strong>Phone:</strong> 
-                        <?php echo $_SESSION['user_data']['phone']; ?>
+                       <?= $row['phone']; ?>
+                       <?= $row['email']; ?>
                     </p>
+                    
     </div>
         <hr>
         <h6 class="fw-bold mb-2">PAY USING</h6>

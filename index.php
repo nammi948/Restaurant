@@ -13,7 +13,7 @@
 
 <body>
     <header class="sticky-top">
-        <nav class="navbar navbar-expand-lg" style="  background-color:#070C20;">
+        <nav class="navbar navbar-expand-lg" style="  background-color:#1A2A6C;">
             <a class="navbar-brand px-5 d-flex align-items-center" href="#">
         <img class="navbar-logo img-fluid rounded-circle me-2" src="assets/images/logo1.jpg" alt="Logo" style="width:80px; height:80px;">
        </a>
@@ -585,7 +585,7 @@
                         <!-- FULL NAME -->
                         <div class="mb-3">
                             <label class="form-label">Full Name</label>
-                            <input type="text" class="form-control" name="name"
+                            <input type="text" class="form-control" name="name[]"
                                 placeholder="Ex: Ramesh Kumar"
                                 oninput="this.value=this.value.replace(/[^A-Za-z\s]/g,'')" required>
                         </div>
@@ -593,65 +593,64 @@
                         <!-- EMAIL -->
                         <div class="mb-3">
                             <label class="form-label">Email</label>
-                            <input type="email" class="form-control" name="email"
+                            <input type="email" class="form-control" name="email[]"
                                 placeholder="Ex: ramesh@gmail.com" required>
                         </div>
 
                         <!-- PASSWORD -->
                         <div class="mb-3">
                             <label class="form-label">Password</label>
-                            <input type="password" class="form-control" name="password"
-                                placeholder="Create Password" required>
+                            <input type="password" class="form-control" name="password[]" placeholder="Create Password" required>
                         </div>
 
                         <!-- PHONE -->
                         <div class="mb-3">
                             <label class="form-label">Phone Number</label>
-                            <input type="text" name="phone" class="form-control"
+                            <input type="text" name="phone[]"
+                                class="form-control"
                                 placeholder="10 digit mobile number"
                                 oninput="this.value=this.value.replace(/[^0-9]/g,'').slice(0,10)" required>
                         </div>
 
                         <!-- ADDRESS SECTION -->
                         <h5 class="fw-bold">Delivery Address</h5>
+
                         <div class="row">
                             <div class="col-md-6 mb-3">
                                 <label class="form-label">House / Flat No.</label>
-                                <input type="text" class="form-control" name="house" required>
+                                <input type="text" class="form-control" name="house[]" required>
                             </div>
 
                             <div class="col-md-6 mb-3">
                                 <label class="form-label">Street / Area</label>
-                                <input type="text" class="form-control" name="street" required>
+                                <input type="text" class="form-control" name="street[]" required>
                             </div>
                         </div>
 
                         <div class="row">
                             <div class="col-md-6 mb-3">
                                 <label class="form-label">City</label>
-                                <input type="text" class="form-control" name="city"
+                                <input type="text" class="form-control" name="city[]"
                                     oninput="this.value=this.value.replace(/[^A-Za-z\s]/g,'')" required>
                             </div>
+
                             <div class="col-md-6 mb-3">
                                 <label class="form-label">State</label>
-                                <input type="text" class="form-control" name="state"
+                                <input type="text" class="form-control" name="state[]"
                                     oninput="this.value=this.value.replace(/[^A-Za-z\s]/g,'')" required>
                             </div>
                         </div>
 
                         <div class="mb-3">
                             <label class="form-label">Pincode</label>
-                            <input type="text" name="pincode" class="form-control"
+                            <input type="text" name="pincode[]" class="form-control"
                                 oninput="this.value=this.value.replace(/[^0-9]/g,'').slice(0,6)" required>
                         </div>
 
                         <!-- BUTTONS -->
                         <div class="modal-footer">
-                            <button type="button" class="btn btn-secondary"
-                                data-bs-dismiss="modal">Close</button>
-                            <button type="submit" class="btn btn-success" name="save">
-                                Register
-                            </button>
+                            <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
+                            <button type="submit" class="btn btn-success" name="save">Register</button>
                         </div>
 
                     </form>
@@ -661,6 +660,7 @@
         </div>
     </div>
 </section>
+
 
          <!-- login -->
 <section>
@@ -675,12 +675,12 @@
                             <form action="login.php" method="POST" id="modal2">
                                 <div class="mb-3">
                                     <label for="Name" class="form-label">Name</label>
-                                    <input type="text" class="form-control" name="name" placeholder="Username"
+                                    <input type="text" class="form-control" name="name[]" placeholder="Username"
                                         oninput="this.value=this.value.replace(/[^A-Za-z/s]/g,'')" required>
                                 </div>
                                 <div class="mb-3">
                                     <label for="Password" class="form-label">Password</label>
-                                    <input type="password" class="form-control" name="password" placeholder="Password">
+                                    <input type="password" class="form-control" name="password[]" placeholder="Password">
                                 </div>
                                <div class="modal-footer d-flex justify-content-between">
     <a href="#" data-bs-toggle="modal" data-bs-target="#modal6">Create an Account</a>

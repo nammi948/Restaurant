@@ -66,6 +66,26 @@ if (isset($_GET['remove'])) {
     header("Location: cart.php");
     exit;
 }
+
+// Check login
+if (!isset($_SESSION['user_data'])) {
+    echo "<script>alert('Please login first'); window.location='login.php';</script>";
+    exit();
+}
+
+// Logged-in user info
+$user = $_SESSION['user_data'];
+$id   = $_SESSION['id'];
+
+$query = "SELECT * FROM register WHERE id='$id'";
+$result = mysqli_query($con, $query);
+
+if (!$result || mysqli_num_rows($result) == 0) {
+    echo "<script>alert('No user found'); window.location='login.php';</script>";
+    exit();
+}
+
+$row = mysqli_fetch_assoc($result); // Fetch user data
 ?>
 <!doctype html>
 <html lang="en">
@@ -172,17 +192,25 @@ if (isset($_GET['remove'])) {
 
                 <?php if (isset($_SESSION['user_data'])): ?>
 
-                    <h6><strong>Name:</strong> <?= $_SESSION['user_data']['name']; ?></h6>
+                    <h6><strong>Name:</strong> <?= $row['name']; ?></h6>
+
+
 
                     <p class="mb-1">
                         <strong>Address:</strong><br>
-                        <?= $_SESSION['user_data']['house'] ?>,
-                        <?= $_SESSION['user_data']['street'] ?>,
-                        <?= $_SESSION['user_data']['city'] ?><br>
-                        Pincode: <?= $_SESSION['user_data']['pincode'] ?>
+                        <?= $row['house']; ?>,
+                        <?= $row['street']; ?>,
+                        <?= $row['city']; ?>,
+                        <?= $row['state']; ?>.<br>
+                        Pincode:<?= $row['pincode']; ?>
+                      
                     </p>
 
-                    <p><strong>Phone:</strong> <?= $_SESSION['user_data']['phone']; ?></p>
+                    <p><strong>Email:</strong><?= $row['email']; ?></p>
+                    <p><strong>Phone:</strong><?= $row['phone']; ?></p>
+
+
+                    
 
                 <?php else: ?>
                     <p class="text-danger">User address missing!</p>
