@@ -59,11 +59,11 @@
         </div>
     </nav>
 
-    <!-- Sidebar -->
+     <!-- <-- Sidebar --> 
     <div class="sidebar pt-5">
         <ul class="nav flex-column mx-2 mt-4">
             <li class="nav-item">
-                <a class="nav-link active text-light fw-bold" href="#">
+                <a class="nav-link active text-light fw-bold" href="dash.php">
                     <i class="fa-solid fa-house me-2"></i> Home
                 </a>
             </li>
@@ -75,8 +75,14 @@
             </li>
 
             <li class="nav-item">
-                <a class="nav-link text-light" href="#order">
+                <a class="nav-link text-light" href="admin_view.php">
                     <i class="fa-solid fa-cart-shopping me-2"></i> Order
+                </a>
+            </li>
+
+             <li class="nav-item">
+                <a class="nav-link text-light" href="add_product.php">
+                   <i class="bi bi-plus-circle-fill me-2"></i></i>Add Menu
                 </a>
             </li>
 
